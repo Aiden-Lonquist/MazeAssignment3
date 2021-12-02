@@ -132,8 +132,17 @@ MonoBehaviour:
   controller: {fileID: 3412612223865773122}
   collider: {fileID: 3412612223865773125}
   player: {fileID: 3412612223865773144}
+  Nwall: {fileID: 2100000, guid: 2abbf41914a808349aad8e0f7c351e23, type: 2}
+  Ewall: {fileID: 2100000, guid: a7e929bc9cb15724996b0509f4184882, type: 2}
+  Swall: {fileID: 2100000, guid: 0d6d614b6659f2345bf10ba0ce73f78e, type: 2}
+  Wwall: {fileID: 2100000, guid: 424acfa613d7df241ac461afbf6359e3, type: 2}
+  floor: {fileID: 2100000, guid: fd1cb9e4fed83024bb18e2a66cee429e, type: 2}
+  skybox: {fileID: 2100000, guid: 51afa1eb977f36a4da2ecca8bcb8f2cd, type: 2}
+  night: {r: 0, g: 0, b: 0, a: 0}
+  day: {r: 0, g: 0, b: 0, a: 0}
   speed: 2
   noclipEnabled: 0
+  isNight: 0
 --- !u!143 &3412612223865773122
 CharacterController:
   m_ObjectHideFlags: 0
