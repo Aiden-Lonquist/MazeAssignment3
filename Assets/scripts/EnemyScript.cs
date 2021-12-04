@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject enemy;
     private Quaternion direction;
     public int initial_rotation_timer, health;
+    public AudioSource deathNoise;
     private int cur_rotation_timer;
     float start_pos_x, start_pos_z;
     // Start is called before the first frame update
@@ -21,10 +22,9 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
+        if (transform.position.y != 0)
         {
-            //call respawn function
-            Destroy(enemy, 0.1f);
+            Destroy(enemy, 0);
         }
         if (cur_rotation_timer < 0)
         {
@@ -59,12 +59,29 @@ public class EnemyScript : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "ball")
+        {
+            takeDamage();
+        }
         rotateEnemy();
     }
+
 
     public void takeDamage()
     {
         health -= 1;
         Debug.Log("Health: " + health);
+        if (health <= 0)
+        {
+            death();
+        }
+    }
+
+    public void death()
+    {
+        deathNoise.time = 0.05f;
+        deathNoise.Play();
+        Destroy(enemy, 0.3f);
+        
     }
 }
