@@ -75,7 +75,7 @@ public class SaveScript : MonoBehaviour
         {
             savedEnemyPOS = GameObject.Find("Enemy(Clone)").transform.position;
         }
-        //Debug.Log("savedscore: " + savedScore + " savedplayerpos: " + savedPlayerPOS + " savedenemypos: " + savedEnemyPOS);
+        Debug.Log("savedscore: " + savedScore + " savedplayerpos: " + savedPlayerPOS + " savedenemypos: " + savedEnemyPOS);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = File.Open(Application.persistentDataPath + filename, FileMode.OpenOrCreate);
         GameData data = new GameData();

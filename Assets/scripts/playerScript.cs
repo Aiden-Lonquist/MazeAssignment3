@@ -19,11 +19,17 @@ public class playerScript : MonoBehaviour
     public AudioSource walk;
     public AudioSource collide;
     public AudioSource bgm;
-
+    public AudioSource bgm2;
+    private AudioSource currentMusic;
+    private bool musicPlaying;
     void Start()
     {
         start_pos_x = -3.5f;
         start_pos_z = -3.5f;
+        currentMusic = bgm;
+        isNight = false;
+        musicPlaying = false;
+        GameObject.Find("Fog").GetComponent<Renderer>().enabled = false;
 
         // night = new Color(0.45f, 0.57f, 1, 1);
         // day = new Color(0.16f, 0.13f, 0.21f, 1);
@@ -47,7 +53,13 @@ public class playerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N))
         {
+            isNight = !isNight;
             ChangeTime();
+            currentMusic.Stop();
+            swapBgm();
+            if (musicPlaying) {
+                currentMusic.Play(); 
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -60,9 +72,13 @@ public class playerScript : MonoBehaviour
             ToggleFlashlight();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             ToggleFog();
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ToggleBgm();
         }
     }
 
@@ -136,19 +152,29 @@ public class playerScript : MonoBehaviour
 
         if (isNight)
         {
+            // CHANGE TO NIGHT
+
             Debug.Log("Night");
             //disable the Light
             sceneLight.GetComponent<Light>().enabled = false;
             skybox.color = night;
         } else
         {
+            // CHANGE TO DAY
+
             Debug.Log("Day");
             //enable the Light
             sceneLight.GetComponent<Light>().enabled = true;
             skybox.color = day;
         }
+    }
 
-        isNight = !isNight;
+    private void swapBgm () {
+        if (currentMusic == bgm) {
+            currentMusic = bgm2;
+        } else {
+            currentMusic = bgm;
+        }
     }
 
     private void ToggleFlashlight() {
@@ -161,11 +187,26 @@ public class playerScript : MonoBehaviour
     }
 
     private void ToggleFog() {
+        
+        Debug.Log(currentMusic.volume);
+
         GameObject fog = GameObject.Find("Fog");
         if (fog.GetComponent<Renderer>().enabled) {
             fog.GetComponent<Renderer>().enabled = false;
+            currentMusic.volume = 1;
         } else {
             fog.GetComponent<Renderer>().enabled = true;
+            currentMusic.volume /= 2;
+        }
+    }
+
+    private void ToggleBgm() {
+        if (currentMusic.isPlaying) {
+            currentMusic.Stop();
+            musicPlaying = false;
+        } else {
+            currentMusic.Play();
+            musicPlaying = true;
         }
     }
 
@@ -189,5 +230,9 @@ public class playerScript : MonoBehaviour
             collide.Play();
         }
 
+    }
+
+    public Vector3 GetPlayerPOS() {
+        return transform.position;
     }
 }
