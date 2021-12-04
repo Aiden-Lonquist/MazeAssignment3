@@ -35,11 +35,11 @@ public class EnemyScript : MonoBehaviour
         direction = Random.rotation;
         // adjust values so that he doesn't rotate along x or y
         direction.x = 0;
-        direction.y *= 45f;
+        //direction.y *= 45f;
         direction.z = 0;
-        direction.w = 20;
+        //direction.w = 20;
         // lerp (FROM rotation, TO rotation, 
-        enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, direction, 0.005f);
+        enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, direction, 0.05f);
     }
 
     private void walk()
@@ -50,5 +50,10 @@ public class EnemyScript : MonoBehaviour
     public void resetPOS()
     {
         enemy.transform.position = new Vector3(start_pos_x, 0f, start_pos_z);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        rotateEnemy();
     }
 }
