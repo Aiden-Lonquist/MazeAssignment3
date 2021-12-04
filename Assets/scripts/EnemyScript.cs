@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject enemy;
     private Quaternion direction;
     public int initial_rotation_timer, health;
+    public AudioSource deathNoise;
     private int cur_rotation_timer;
     float start_pos_x, start_pos_z;
     // Start is called before the first frame update
@@ -21,6 +22,10 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y != 0)
+        {
+            Destroy(enemy, 0);
+        }
         if (cur_rotation_timer < 0)
         {
             rotateEnemy();
@@ -74,7 +79,9 @@ public class EnemyScript : MonoBehaviour
 
     public void death()
     {
-        Destroy(enemy, 0.1f);
-        //play sound
+        deathNoise.time = 0.05f;
+        deathNoise.Play();
+        Destroy(enemy, 0.3f);
+        
     }
 }

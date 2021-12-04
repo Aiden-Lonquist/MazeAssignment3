@@ -57,6 +57,7 @@ public class playerScript : MonoBehaviour
         Vector3 movement = transform.right * x_movement + transform.forward * z_movement;
 
         controller.Move(movement * speed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
 
     private void Noclip()
@@ -105,6 +106,6 @@ public class playerScript : MonoBehaviour
 
     private void ThrowBall()
     {
-        Instantiate(ball, head.transform.position + head.transform.forward, head.transform.rotation);
+        Instantiate(ball, head.transform.position + head.transform.forward/2, head.transform.rotation);
     }
 }
