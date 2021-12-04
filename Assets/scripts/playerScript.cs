@@ -52,6 +52,11 @@ public class playerScript : MonoBehaviour
         {
             ToggleFlashlight();
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ToggleFog();
+        }
     }
 
     private void movement()
@@ -122,6 +127,15 @@ public class playerScript : MonoBehaviour
             flashlight.GetComponent<Light>().enabled = false;
         } else {
             flashlight.GetComponent<Light>().enabled = true;
+        }
+    }
+
+    private void ToggleFog() {
+        GameObject fog = GameObject.Find("Fog");
+        if (fog.GetComponent<Renderer>().enabled) {
+            fog.GetComponent<Renderer>().enabled = false;
+        } else {
+            fog.GetComponent<Renderer>().enabled = true;
         }
     }
 
