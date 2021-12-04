@@ -74,11 +74,18 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    private void ResetPOS()
+    public void ResetPOS()
     {
         player.transform.position = new Vector3(start_pos_x, 0.5f, start_pos_z);
-        GameObject enemy = GameObject.Find("Enemy"); 
-        enemy.GetComponent<EnemyScript>().resetPOS();
+        if (GameObject.Find("Enemy") != null)
+        {
+            GameObject enemy = GameObject.Find("Enemy");
+            enemy.GetComponent<EnemyScript>().resetPOS();
+        } else
+        {
+            GameObject enemy = GameObject.Find("Enemy(Clone)");
+            enemy.GetComponent<EnemyScript>().resetPOS();
+        }
     }
 
     private void ChangeTime()
@@ -107,5 +114,13 @@ public class playerScript : MonoBehaviour
     private void ThrowBall()
     {
         Instantiate(ball, head.transform.position + head.transform.forward/2, head.transform.rotation);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            ResetPOS();
+        }
     }
 }

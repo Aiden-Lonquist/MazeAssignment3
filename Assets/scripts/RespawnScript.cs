@@ -7,6 +7,7 @@ public class RespawnScript : MonoBehaviour
     public int respawnTimer;
     public int timer;
     public GameObject enemy;
+    public AudioSource spawnSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,8 @@ public class RespawnScript : MonoBehaviour
 
     public void spawnNewEnemy()
     {
+        spawnSound.time = 0.05f;
+        spawnSound.Play();
         float x = Random.Range(-3.5f, 3.5f);
         float y = 0;
         float z = Random.Range(-3.5f, 3.5f); ;
