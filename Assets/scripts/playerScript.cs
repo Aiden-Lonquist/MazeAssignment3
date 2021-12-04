@@ -6,7 +6,7 @@ public class playerScript : MonoBehaviour
 {
     public CharacterController controller;
     public CapsuleCollider collider;
-    public GameObject player;
+    public GameObject player, ball, head;
     public Material Nwall, Ewall, Swall, Wwall, floor, skybox;
     public Color night, day;
     public float speed;
@@ -18,9 +18,9 @@ public class playerScript : MonoBehaviour
         start_pos_x = -3.5f;
         start_pos_z = -3.5f;
 
-        night = new Color(0.33f, 0.31f, 0.37f, 1);
-        day = new Color(1, 1, 1, 1);
-        skybox.color = new Color(0.45f, 0.57f, 1, 1);
+        // night = new Color(0.45f, 0.57f, 1, 1);
+        // day = new Color(0.16f, 0.13f, 0.21f, 1);
+        skybox.color = day;
     }
 
     // Update is called once per frame
@@ -42,6 +42,16 @@ public class playerScript : MonoBehaviour
         {
             ChangeTime();
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ThrowBall();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            ToggleFlashlight();
+        }
     }
 
     private void movement()
@@ -52,6 +62,7 @@ public class playerScript : MonoBehaviour
         Vector3 movement = transform.right * x_movement + transform.forward * z_movement;
 
         controller.Move(movement * speed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
 
     private void Noclip()
@@ -68,33 +79,62 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    private void ResetPOS()
+    public void ResetPOS()
     {
         player.transform.position = new Vector3(start_pos_x, 0.5f, start_pos_z);
-        GameObject enemy = GameObject.Find("Enemy"); 
-        enemy.GetComponent<EnemyScript>().resetPOS();
+        if (GameObject.Find("Enemy") != null)
+        {
+            GameObject enemy = GameObject.Find("Enemy");
+            enemy.GetComponent<EnemyScript>().resetPOS();
+        } else
+        {
+            GameObject enemy = GameObject.Find("Enemy(Clone)");
+            enemy.GetComponent<EnemyScript>().resetPOS();
+        }
     }
 
     private void ChangeTime()
     {
-        isNight = !isNight;
+        //get the reference to the light Object by tag
+        var sceneLight = GameObject.FindWithTag( "light" );
+
+
         if (isNight)
         {
-            //turn on shader so it looks like night time
-            Nwall.color = night;
-            Ewall.color = night;
-            Swall.color = night;
-            Wwall.color = night;
-            floor.color = night;
-            skybox.color = new Color(0.16f, 0.13f, 0.21f, 1);
+            Debug.Log("Night");
+            //disable the Light
+            sceneLight.GetComponent<Light>().enabled = false;
+            skybox.color = night;
         } else
         {
-            Nwall.color = day;
-            Ewall.color = day;
-            Swall.color = day;
-            Wwall.color = day;
-            floor.color = day;
-            skybox.color = new Color(0.45f, 0.57f, 1, 1);
+            Debug.Log("Day");
+            //enable the Light
+            sceneLight.GetComponent<Light>().enabled = true;
+            skybox.color = day;
+        }
+
+        isNight = !isNight;
+    }
+
+    private void ToggleFlashlight() {
+        GameObject flashlight = GameObject.Find("Flashlight");
+        if (flashlight.GetComponent<Light>().enabled) {
+            flashlight.GetComponent<Light>().enabled = false;
+        } else {
+            flashlight.GetComponent<Light>().enabled = true;
+        }
+    }
+
+    private void ThrowBall()
+    {
+        Instantiate(ball, head.transform.position + head.transform.forward/2, head.transform.rotation);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            ResetPOS();
         }
     }
 }
