@@ -94,6 +94,11 @@ public class playerScript : MonoBehaviour
         }
     }
 
+    public void setPOS(Vector3 pos)
+    {
+        player.transform.position = pos;
+    }
+
     private void ChangeTime()
     {
         //get the reference to the light Object by tag
@@ -138,5 +143,10 @@ public class playerScript : MonoBehaviour
         {
             ResetPOS();
         } 
+    }
+
+    public Vector3 GetPlayerPOS()
+    {
+        return transform.position;
     }
 }
