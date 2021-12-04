@@ -18,9 +18,9 @@ public class playerScript : MonoBehaviour
         start_pos_x = -3.5f;
         start_pos_z = -3.5f;
 
-        night = new Color(0.33f, 0.31f, 0.37f, 1);
-        day = new Color(1, 1, 1, 1);
-        skybox.color = new Color(0.45f, 0.57f, 1, 1);
+        // night = new Color(0.45f, 0.57f, 1, 1);
+        // day = new Color(0.16f, 0.13f, 0.21f, 1);
+        skybox.color = day;
     }
 
     // Update is called once per frame
@@ -82,25 +82,25 @@ public class playerScript : MonoBehaviour
 
     private void ChangeTime()
     {
-        isNight = !isNight;
+        //get the reference to the light Object by tag
+        var sceneLight = GameObject.FindWithTag( "light" );
+
+
         if (isNight)
         {
-            //turn on shader so it looks like night time
-            Nwall.color = night;
-            Ewall.color = night;
-            Swall.color = night;
-            Wwall.color = night;
-            floor.color = night;
-            skybox.color = new Color(0.16f, 0.13f, 0.21f, 1);
+            Debug.Log("Night");
+            //disable the Light
+            sceneLight.GetComponent<Light>().enabled = false;
+            skybox.color = night;
         } else
         {
-            Nwall.color = day;
-            Ewall.color = day;
-            Swall.color = day;
-            Wwall.color = day;
-            floor.color = day;
-            skybox.color = new Color(0.45f, 0.57f, 1, 1);
+            Debug.Log("Day");
+            //enable the Light
+            sceneLight.GetComponent<Light>().enabled = true;
+            skybox.color = day;
         }
+
+        isNight = !isNight;
     }
 
     private void ThrowBall()
