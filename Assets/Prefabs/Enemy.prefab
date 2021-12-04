@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 4606223442788485021}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -571,6 +571,7 @@ MonoBehaviour:
   speed: 0.005
   enemy: {fileID: 3687882950595132111}
   initial_rotation_timer: 500
+  health: 3
 --- !u!1 &3728470063700435617
 GameObject:
   m_ObjectHideFlags: 0

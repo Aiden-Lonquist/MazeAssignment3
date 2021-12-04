@@ -6,7 +6,7 @@ public class playerScript : MonoBehaviour
 {
     public CharacterController controller;
     public CapsuleCollider collider;
-    public GameObject player;
+    public GameObject player, ball, head;
     public Material Nwall, Ewall, Swall, Wwall, floor, skybox;
     public Color night, day;
     public float speed;
@@ -41,6 +41,11 @@ public class playerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N))
         {
             ChangeTime();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ThrowBall();
         }
     }
 
@@ -96,5 +101,10 @@ public class playerScript : MonoBehaviour
             floor.color = day;
             skybox.color = new Color(0.45f, 0.57f, 1, 1);
         }
+    }
+
+    private void ThrowBall()
+    {
+        Instantiate(ball, head.transform.position + head.transform.forward, head.transform.rotation);
     }
 }
