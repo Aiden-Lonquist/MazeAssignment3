@@ -6,11 +6,11 @@ public class BallScript : MonoBehaviour
 {
     public int surviveTime;
     public float speed;
-    public GameObject self, enemy;
+    public GameObject self;
     // Start is called before the first frame update
     void Start()
     {
-          
+        
     }
 
     // Update is called once per frame
@@ -24,17 +24,17 @@ public class BallScript : MonoBehaviour
 
         if(surviveTime <= 0)
         {
-            Destroy(self, 0.1f);
+            Destroy(self, 0.01f);
         }
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("play sound");
-        if (collision.gameObject.tag == enemy.tag)
+        //play sound
+        if (collision.gameObject.tag == "enemy")
         {
             Debug.Log("Collided with enemy");
-            enemy.GetComponent<EnemyScript>().takeDamage();
+            Destroy(self, 0.01f);
         }
 
     }

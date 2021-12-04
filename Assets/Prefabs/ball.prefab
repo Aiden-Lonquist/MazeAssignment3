@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7985832401641757103}
   m_Layer: 0
   m_Name: ball
-  m_TagString: Untagged
+  m_TagString: ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,6 @@ MonoBehaviour:
   surviveTime: 600
   speed: 0.02
   self: {fileID: 7571805979172658940}
-  enemy: {fileID: 3687882950595132111, guid: 88a6f6d100605624db1220c3ad389b6b, type: 3}
 --- !u!54 &7985832401641757103
 Rigidbody:
   m_ObjectHideFlags: 0

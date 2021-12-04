@@ -21,11 +21,6 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            //call respawn function
-            Destroy(enemy, 0.1f);
-        }
         if (cur_rotation_timer < 0)
         {
             rotateEnemy();
@@ -59,12 +54,27 @@ public class EnemyScript : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "ball")
+        {
+            takeDamage();
+        }
         rotateEnemy();
     }
+
 
     public void takeDamage()
     {
         health -= 1;
         Debug.Log("Health: " + health);
+        if (health <= 0)
+        {
+            death();
+        }
+    }
+
+    public void death()
+    {
+        Destroy(enemy, 0.1f);
+        //play sound
     }
 }
