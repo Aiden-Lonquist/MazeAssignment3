@@ -47,6 +47,11 @@ public class playerScript : MonoBehaviour
         {
             ThrowBall();
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            ToggleFlashlight();
+        }
     }
 
     private void movement()
@@ -101,6 +106,15 @@ public class playerScript : MonoBehaviour
         }
 
         isNight = !isNight;
+    }
+
+    private void ToggleFlashlight() {
+        GameObject flashlight = GameObject.Find("Flashlight");
+        if (flashlight.GetComponent<Light>().enabled) {
+            flashlight.GetComponent<Light>().enabled = false;
+        } else {
+            flashlight.GetComponent<Light>().enabled = true;
+        }
     }
 
     private void ThrowBall()
