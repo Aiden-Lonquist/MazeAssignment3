@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a47d3cd8c79bc6f43858881093d88e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTimer: 100
-  self: {fileID: 2343138363578247539}
+  respawnTimer: 300
+  timer: 0
   enemy: {fileID: 3687882950595132111, guid: 88a6f6d100605624db1220c3ad389b6b, type: 3}

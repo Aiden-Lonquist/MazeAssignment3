@@ -30,9 +30,9 @@ public class RespawnScript : MonoBehaviour
 
     public void spawnNewEnemy()
     {
-        float x = Random.Range(-4.5f, 2.5f);
+        float x = Random.Range(-3.5f, 3.5f);
         float y = 0;
-        float z = Random.Range(-7f, -0f); ;
+        float z = Random.Range(-3.5f, 3.5f); ;
         Instantiate(enemy, new Vector3(x, y, z), transform.rotation);
     }
 }

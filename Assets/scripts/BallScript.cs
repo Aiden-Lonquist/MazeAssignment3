@@ -7,6 +7,7 @@ public class BallScript : MonoBehaviour
     public int surviveTime;
     public float speed;
     public GameObject self;
+    public AudioSource bounce;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +31,8 @@ public class BallScript : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        //play sound
+        bounce.time = 0.3f;
+        bounce.Play();
         if (collision.gameObject.tag == "enemy")
         {
             Debug.Log("Collided with enemy");
