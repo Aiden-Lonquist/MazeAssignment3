@@ -14,6 +14,12 @@ public class playerScript : MonoBehaviour
     public bool noclipEnabled, isNight;
     float start_pos_x, start_pos_z;
     // Start is called before the first frame update
+
+    [Header("Sounds")]
+    public AudioSource walk;
+    public AudioSource collide;
+    public AudioSource bgm;
+
     void Start()
     {
         start_pos_x = -3.5f;
@@ -53,6 +59,11 @@ public class playerScript : MonoBehaviour
         {
             ToggleFlashlight();
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ToggleFog();
+        }
     }
 
     private void movement()
@@ -60,10 +71,28 @@ public class playerScript : MonoBehaviour
         float x_movement = Input.GetAxis("Horizontal");
         float z_movement = Input.GetAxis("Vertical");
 
+        if (x_movement != 0 || z_movement != 0)
+        {
+            PlayWalkSound();
+        } else {
+            PlayWalkSound(false);
+        }
+
         Vector3 movement = transform.right * x_movement + transform.forward * z_movement;
 
         controller.Move(movement * speed * Time.deltaTime);
         transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+    }
+
+    private void PlayWalkSound(bool toggle = true) {
+        if (toggle) {
+            if (!walk.isPlaying) {
+                walk.time = 0;
+                walk.Play();
+            }
+        } else {
+            walk.Stop();
+        }
     }
 
     private void Noclip()
@@ -131,6 +160,15 @@ public class playerScript : MonoBehaviour
         }
     }
 
+    private void ToggleFog() {
+        GameObject fog = GameObject.Find("Fog");
+        if (fog.GetComponent<Renderer>().enabled) {
+            fog.GetComponent<Renderer>().enabled = false;
+        } else {
+            fog.GetComponent<Renderer>().enabled = true;
+        }
+    }
+
     private void ThrowBall()
     {
         Instantiate(ball, head.transform.position + head.transform.forward/2, head.transform.rotation);
@@ -139,14 +177,17 @@ public class playerScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "enemy")
         {
             ResetPOS();
-        } 
-    }
+        }
 
-    public Vector3 GetPlayerPOS()
-    {
-        return transform.position;
+        if (collision.gameObject.tag == "wall")
+        {
+            Debug.Log("HIT WALL");
+            collide.Play();
+        }
+
     }
 }
