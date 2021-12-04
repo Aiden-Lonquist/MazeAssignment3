@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerScript : MonoBehaviour
 {
@@ -122,6 +123,11 @@ public class playerScript : MonoBehaviour
         }
     }
 
+    public void setPOS(Vector3 pos)
+    {
+        player.transform.position = pos;
+    }
+
     private void ChangeTime()
     {
         //get the reference to the light Object by tag
@@ -168,6 +174,7 @@ public class playerScript : MonoBehaviour
         Instantiate(ball, head.transform.position + head.transform.forward/2, head.transform.rotation);
     }
 
+
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.tag);
@@ -181,5 +188,6 @@ public class playerScript : MonoBehaviour
             Debug.Log("HIT WALL");
             collide.Play();
         }
+
     }
 }

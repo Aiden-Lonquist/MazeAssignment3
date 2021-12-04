@@ -26,7 +26,6 @@ public class RespawnScript : MonoBehaviour
             }
             timer -= 1;
         }
-        Debug.Log(timer);
     }
 
     public void spawnNewEnemy()

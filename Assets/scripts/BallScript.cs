@@ -35,7 +35,7 @@ public class BallScript : MonoBehaviour
         bounce.Play();
         if (collision.gameObject.tag == "enemy")
         {
-            Debug.Log("Collided with enemy");
+            GameObject.Find("saveManager").GetComponent<SaveScript>().increaseScore();
             Destroy(self, 0.01f);
         }
 
