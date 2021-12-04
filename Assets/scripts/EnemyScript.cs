@@ -62,6 +62,11 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.tag == "ball")
         {
             takeDamage();
+        } else if (collision.gameObject.tag == "Player")
+        {
+            resetPOS();
+            GameObject player = GameObject.Find("Player");
+            player.GetComponent<playerScript>().ResetPOS();
         }
         rotateEnemy();
     }
