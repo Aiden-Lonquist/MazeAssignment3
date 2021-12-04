@@ -1,0 +1,52 @@
+{
+    "name": "consoleControl",
+    "maps": [
+        {
+            "name": "consoleMap",
+            "id": "77cf8e20-b3a0-4381-a198-ca378e35a8ae",
+            "actions": [
+                {
+                    "name": "Enter",
+                    "type": "Button",
+                    "id": "b29ab585-8552-44ea-95cc-ad134c395fd4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Tab",
+                    "type": "Button",
+                    "id": "20fa151c-cf55-4099-8757-57234ae97e54",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2dc44323-d975-4b63-b773-f0f222914762",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e17d8085-f4d7-4e88-a925-9776f01119e4",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

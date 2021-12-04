@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerScript : MonoBehaviour
 {
@@ -130,11 +131,12 @@ public class playerScript : MonoBehaviour
         Instantiate(ball, head.transform.position + head.transform.forward/2, head.transform.rotation);
     }
 
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "enemy")
         {
             ResetPOS();
-        }
+        } 
     }
 }
