@@ -19,9 +19,9 @@ public class minigameScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("COLLIDED");
         if (col.name == "Player")
         {
+
             SceneManager.LoadScene(1);
         }
     }
